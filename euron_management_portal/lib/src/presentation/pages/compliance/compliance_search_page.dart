@@ -13,9 +13,9 @@ class _ComplianceSearchPageState extends State<ComplianceSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(imagePath: 'euron_logo.png'),
+      appBar: const CustomAppBar(imagePath: 'euron_logo.png'),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             const Row(
@@ -25,13 +25,19 @@ class _ComplianceSearchPageState extends State<ComplianceSearchPage> {
                   style: TextStyle(fontSize: 25),
                 ),
                 SizedBox(width: 15),
-                Icon(Icons.filter_list_outlined, color: euronSoftPurple,)
+                Icon(
+                  Icons.filter_list_outlined,
+                  color: euronSoftPurple,
+                )
               ],
             ),
-            ListView.builder(itemBuilder: (context, index) {},
-            scrollDirection: Axis.vertical,
-            itemCount: 10,
-            )
+            ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  
+                })
           ],
         ),
       ),
