@@ -15,6 +15,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int currentPage = 0;
   PageController pageController = PageController(initialPage: 0);
 
+  void navigateToPage(int page) {
+    pageController.animateToPage(page,
+        duration: const Duration(milliseconds: 400), curve: Curves.ease);
+    setState(() {
+      currentPage = page;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -27,24 +35,33 @@ class _BottomNavBarState extends State<BottomNavBar> {
               currentPage = page;
             });
           },
-          children: const [
-            HomePage(),
-            ComplianceSearchPage(),
-            TrainingSearchPage(),
+          children: [
+            HomePage(
+              navigateToCompliance: () => navigateToPage(1),
+              navigateToTraining: () => navigateToPage(2)
+            ),
+            const ComplianceSearchPage(),
+            const TrainingSearchPage(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentPage,
           iconSize: 30,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_rounded,), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.edit_document), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Home')
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_rounded,
+                ),
+                label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.edit_document), label: 'Compliance'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.school), label: 'Treinamentos')
           ],
           unselectedItemColor: euronWhite,
           selectedItemColor: euronCyan,
           onTap: (page) {
-            pageController.animateToPage(page, duration: const Duration(milliseconds: 400), curve: Curves.ease);
+            navigateToPage(page);
           },
         ),
       ),
