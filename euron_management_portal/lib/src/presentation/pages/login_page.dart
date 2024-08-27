@@ -1,7 +1,11 @@
 import 'package:euron_management_portal/src/config/globals.dart';
 import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
 import 'package:euron_management_portal/src/presentation/components/decorated_text_form_field.dart';
+import 'package:euron_management_portal/src/utils/validations/email_validator.dart';
+import 'package:euron_management_portal/src/utils/validations/password_validator.dart';
 import 'package:flutter/material.dart';
+
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,12 +36,28 @@ class _LoginPageState extends State<LoginPage> {
               child: Center(
                 child: Form(
                   key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      DecoratedTextFormField(label: 'Email', controller: _emailController),
+                      DecoratedTextFormField(
+                        label: 'Email',
+                        controller: _emailController,
+                        validator: (value) {
+                          String? result = EmailValidator.validate(value!);
+                          return result!.isEmpty ? null : result;
+                        },
+                      ),
                       const SizedBox(height: 25),
-                      DecoratedTextFormField(label: 'Senha', controller: _passwordController),
+                      DecoratedTextFormField(
+                        label: 'Senha',
+                        controller: _passwordController,
+                        validator: (value) {
+                          String? result = PasswordValidator.validate(value!);
+                          return result!.isEmpty ? null : result;
+                        },
+                        isObscure: true,
+                      ),
                       const SizedBox(height: 25),
                       SizedBox(
                         width: double.infinity,
@@ -46,7 +66,12 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.pushReplacement(context, 
+                                  MaterialPageRoute(builder: (context) => const HomePage()));
+                                }
+                              },
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(100, 50),
                                 backgroundColor: euronSoftPurple,
