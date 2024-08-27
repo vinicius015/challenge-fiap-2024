@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: euronWhite,
           appBarTheme: const AppBarTheme(backgroundColor: euronDarkBlue),
           bottomNavigationBarTheme:
-              const BottomNavigationBarThemeData(backgroundColor: euronSoftPurple)),
+              const BottomNavigationBarThemeData(backgroundColor: euronDarkBlue)),
       home: const LoginPage(),
     );
   }

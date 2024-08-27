@@ -1,4 +1,5 @@
 import 'package:euron_management_portal/src/config/globals.dart';
+import 'package:euron_management_portal/src/presentation/components/bottom_nav_bar.dart';
 import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
 import 'package:euron_management_portal/src/presentation/components/decorated_text_form_field.dart';
 import 'package:euron_management_portal/src/utils/validations/email_validator.dart';
@@ -67,9 +68,9 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() == false) {
                                   Navigator.pushReplacement(context, 
-                                  MaterialPageRoute(builder: (context) => const HomePage()));
+                                  MaterialPageRoute(builder: (context) => const BottomNavBar()));
                                 }
                               },
                               style: ElevatedButton.styleFrom(
@@ -95,8 +96,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Image.asset(
-              'eurofarma_logo.png', // Caminho correto da imagem
-              width: 200, // Ajuste a largura conforme necessário
+              'eurofarma_logo.png',
+              width: 200, 
             ),
           ],
         ),
