@@ -1,4 +1,5 @@
 import 'package:euron_management_portal/src/config/globals.dart';
+import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
 import 'package:euron_management_portal/src/presentation/components/decorated_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -22,14 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Image.asset(
-            'euron_logo.png',
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+      appBar: const CustomAppBar(imagePath: 'euron_logo.png'),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
