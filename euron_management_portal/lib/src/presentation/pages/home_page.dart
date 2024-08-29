@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import '../../config/globals.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final VoidCallback navigateToCompliance;
+  final VoidCallback navigateToTraining;
+
+  const HomePage(
+      {super.key,
+      required this.navigateToCompliance,
+      required this.navigateToTraining});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 25),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: navigateToCompliance,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(150, 60),
                   backgroundColor: euronSoftPurple,
@@ -33,7 +39,7 @@ class HomePage extends StatelessWidget {
                     const Text('Compliance', style: TextStyle(fontSize: 20))),
             const SizedBox(height: 25),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: navigateToTraining,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(150, 60),
                   backgroundColor: euronSoftPurple,

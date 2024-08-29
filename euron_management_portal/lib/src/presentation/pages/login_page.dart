@@ -6,8 +6,6 @@ import 'package:euron_management_portal/src/utils/validations/email_validator.da
 import 'package:euron_management_portal/src/utils/validations/password_validator.dart';
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -68,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate() == false) {
+                                if (_formKey.currentState!.validate()) {
                                   Navigator.pushReplacement(context, 
                                   MaterialPageRoute(builder: (context) => const BottomNavBar()));
                                 }
