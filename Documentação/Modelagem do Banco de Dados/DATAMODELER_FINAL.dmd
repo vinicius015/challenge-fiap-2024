@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="DATAMODELER_FINAL" id="66E00642-16D7-62C3-4552-204046099B31" version="3.5">
+<createdBy>labsfiap</createdBy>
+<createdTime>2024-08-23 22:43:39 UTC</createdTime>
+<ownerDesignName>DATAMODELER_FINAL</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>66E00642-16D7-62C3-4552-204046099B31</designId>
+</OSDM_Design>
