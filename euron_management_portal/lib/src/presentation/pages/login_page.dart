@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate() == false) {
+                                if (_formKey.currentState!.validate()) {
                                   Navigator.pushReplacement(context, 
                                   MaterialPageRoute(builder: (context) => const BottomNavBar()));
                                 }

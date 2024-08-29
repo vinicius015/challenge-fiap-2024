@@ -1,5 +1,6 @@
 import 'package:euron_management_portal/src/config/globals.dart';
 import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
+import 'package:euron_management_portal/src/presentation/components/manual_horizontal_item.dart';
 import 'package:flutter/material.dart';
 
 class ComplianceSearchPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _ComplianceSearchPageState extends State<ComplianceSearchPage> {
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  
+                  return ManualHorizontalItem();
                 })
           ],
         ),
