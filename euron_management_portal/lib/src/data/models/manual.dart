@@ -1,4 +1,4 @@
-import 'package:euron_management_portal/src/data/models/User.dart';
+import 'package:euron_management_portal/src/data/models/user.dart';
 
 class Manual {
   final String _title;

@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         body: PageView(
           controller: pageController,
@@ -37,10 +37,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           },
           children: [
             HomePage(
-              navigateToCompliance: () => navigateToPage(1),
-              navigateToTraining: () => navigateToPage(2)
+              navigateToTraining: () => navigateToPage(1)
             ),
-            const ComplianceSearchPage(),
             const TrainingSearchPage(),
           ],
         ),
@@ -53,8 +51,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   Icons.home_rounded,
                 ),
                 label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.edit_document), label: 'Compliance'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.school), label: 'Treinamentos')
           ],
