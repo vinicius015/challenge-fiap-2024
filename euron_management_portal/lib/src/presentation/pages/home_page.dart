@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import '../../config/globals.dart';
 
 class HomePage extends StatelessWidget {
-  final VoidCallback navigateToCompliance;
   final VoidCallback navigateToTraining;
 
   const HomePage(
       {super.key,
-      required this.navigateToCompliance,
       required this.navigateToTraining});
 
   @override
@@ -27,16 +25,6 @@ class HomePage extends StatelessWidget {
               style: TextStyle(fontSize: 23),
             ),
             const SizedBox(height: 25),
-            ElevatedButton(
-                onPressed: navigateToCompliance,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(150, 60),
-                  backgroundColor: euronSoftPurple,
-                  elevation: 0,
-                  foregroundColor: euronWhite,
-                ),
-                child:
-                    const Text('Compliance', style: TextStyle(fontSize: 20))),
             const SizedBox(height: 25),
             ElevatedButton(
                 onPressed: navigateToTraining,
@@ -46,7 +34,7 @@ class HomePage extends StatelessWidget {
                   elevation: 0,
                   foregroundColor: euronWhite,
                 ),
-                child: const Text('Treinamentos (Em Breve)',
+                child: const Text('Treinamentos',
                     style: TextStyle(fontSize: 20))),
           ],
         ),
