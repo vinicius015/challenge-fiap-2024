@@ -10,7 +10,7 @@ class ManualHorizontalItem extends StatefulWidget {
 class _ManualHorizontalItemState extends State<ManualHorizontalItem> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         
       ],

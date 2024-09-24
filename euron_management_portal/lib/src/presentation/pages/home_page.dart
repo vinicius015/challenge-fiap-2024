@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(imagePath: 'euron_logo.png'),
+      appBar: const CustomAppBar(imagePath: 'assets/euron_logo.png'),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
