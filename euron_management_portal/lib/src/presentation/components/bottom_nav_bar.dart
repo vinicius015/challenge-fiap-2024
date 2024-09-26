@@ -1,7 +1,7 @@
 import 'package:euron_management_portal/src/config/globals.dart';
-import 'package:euron_management_portal/src/presentation/pages/compliance/compliance_search_page.dart';
+import 'package:euron_management_portal/src/presentation/pages/update_employees_data/update_employees_data_page.dart';
 import 'package:euron_management_portal/src/presentation/pages/home_page.dart';
-import 'package:euron_management_portal/src/presentation/pages/training/training_search_page.dart';
+import 'package:euron_management_portal/src/presentation/pages/training/training_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         body: PageView(
           controller: pageController,
@@ -37,9 +37,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
           },
           children: [
             HomePage(
-              navigateToTraining: () => navigateToPage(1)
+              navigateToTraining: () => navigateToPage(1),
+              navigateToUpdateEmployeesData: () => navigateToPage(2),
             ),
-            const TrainingSearchPage(),
+            const TrainingPage(),
+            const UpdateEmployeesDataPage(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -52,7 +54,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ),
                 label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.school), label: 'Treinamentos')
+                icon: Icon(Icons.school), label: 'Treinamentos'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.storage), label: 'Base de Funcionários')
           ],
           unselectedItemColor: euronWhite,
           selectedItemColor: euronCyan,
