@@ -9,7 +9,7 @@ class DecoratedTextFormField extends StatelessWidget {
   final bool? isObscure;
 
   const DecoratedTextFormField(
-      {super.key, required this.label, required this.controller, this.validator, this.isObscure});
+      {super.key, required this.label, required this.controller, this.validator, this.isObscure, required TextInputType keyboardType});
 
   @override
   Widget build(BuildContext context) {

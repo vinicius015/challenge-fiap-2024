@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(imagePath: 'assets/euron_logo.png'),
+      appBar: const CustomAppBar(hasHomeButton: false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       DecoratedTextFormField(
+                        keyboardType: TextInputType.text,
                         label: 'Email',
                         controller: _emailController,
                         validator: (value) {
@@ -49,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 25),
                       DecoratedTextFormField(
+                        keyboardType: TextInputType.text,
                         label: 'Senha',
                         controller: _passwordController,
                         validator: (value) {
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   Navigator.pushReplacement(context, 
-                                  MaterialPageRoute(builder: (context) => const BottomNavBar()));
+                                  MaterialPageRoute(builder: (context) => const BottomNavBar(initialPage: 0)));
                                 }
                               },
                               style: ElevatedButton.styleFrom(

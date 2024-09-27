@@ -5,15 +5,23 @@ import 'package:euron_management_portal/src/presentation/pages/training/training
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({super.key, required this.initialPage});
+  final int initialPage;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int currentPage = 0;
-  PageController pageController = PageController(initialPage: 0);
+  late int currentPage;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    currentPage = widget.initialPage;
+    pageController = PageController(initialPage: currentPage);
+  }
 
   void navigateToPage(int page) {
     pageController.animateToPage(page,
