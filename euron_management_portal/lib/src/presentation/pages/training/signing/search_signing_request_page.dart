@@ -1,3 +1,4 @@
+import 'package:euron_management_portal/src/presentation/pages/training/signing/signing_quiz_page.dart';
 import 'package:flutter/material.dart';
 import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
 
@@ -134,6 +135,13 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
                   final request = _filteredSigningRequests()[index];
                   return Card(
                     child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const QuizPage()));
+                      },
                       leading: Checkbox(
                         value: _selectedItems[index],
                         onChanged: (bool? value) {
