@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import '../../config/globals.dart';
 
 class HomePage extends StatelessWidget {
+  final bool isAdmin;
   final VoidCallback navigateToTraining;
-  final VoidCallback navigateToUpdateEmployeesData;
+  final VoidCallback? navigateToUpdateEmployeesData;
 
   const HomePage(
       {super.key,
+      required this.isAdmin,
       required this.navigateToTraining,
-      required this.navigateToUpdateEmployeesData});
+      this.navigateToUpdateEmployeesData});
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +42,21 @@ class HomePage extends StatelessWidget {
                 child:
                     const Text('Treinamentos', style: TextStyle(fontSize: 20))),
             const SizedBox(height: 20),
-            ElevatedButton(
-                onPressed: navigateToUpdateEmployeesData,
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(400, 60),
-                    backgroundColor: euronSoftPurple,
-                    elevation: 0,
-                    foregroundColor: euronWhite,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    )),
-                child: const Text('Base de Funcionários',
-                    style: TextStyle(fontSize: 20))),
+            // Verificação para mostrar o botão Base de Funcionários
+            if (isAdmin) ...[
+              ElevatedButton(
+                  onPressed: navigateToUpdateEmployeesData,
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(400, 60),
+                      backgroundColor: euronSoftPurple,
+                      elevation: 0,
+                      foregroundColor: euronWhite,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      )),
+                  child: const Text('Base de Funcionários',
+                      style: TextStyle(fontSize: 20))),
+            ],
           ],
         ),
       ),

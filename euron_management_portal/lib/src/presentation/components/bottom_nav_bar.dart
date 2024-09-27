@@ -5,8 +5,10 @@ import 'package:euron_management_portal/src/presentation/pages/training/training
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key, required this.initialPage});
+  const BottomNavBar(
+      {super.key, required this.initialPage, required this.isAdmin});
   final int initialPage;
+  final bool isAdmin;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -33,45 +35,41 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        body: PageView(
-          controller: pageController,
-          onPageChanged: (page) {
-            setState(() {
-              currentPage = page;
-            });
-          },
-          children: [
-            HomePage(
-              navigateToTraining: () => navigateToPage(1),
-              navigateToUpdateEmployeesData: () => navigateToPage(2),
-            ),
-            const TrainingPage(),
-            const UpdateEmployeesDataPage(),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentPage,
-          iconSize: 30,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_rounded,
-                ),
-                label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.school), label: 'Treinamentos'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.storage), label: 'Base de Funcionários')
-          ],
-          unselectedItemColor: euronWhite,
-          selectedItemColor: euronCyan,
-          onTap: (page) {
-            navigateToPage(page);
-          },
-        ),
+    return Scaffold(
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (page) {
+          setState(() {
+            currentPage = page;
+          });
+        },
+        children: [
+          HomePage(
+            isAdmin: widget.isAdmin,
+            navigateToTraining: () => navigateToPage(1),
+            navigateToUpdateEmployeesData: widget.isAdmin ? () => navigateToPage(2) : null,
+          ),
+          TrainingPage(isAdmin: widget.isAdmin,),
+          if (widget.isAdmin) const UpdateEmployeesDataPage(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentPage,
+        iconSize: 30,
+        items: [
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded), label: 'Home'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.school), label: 'Treinamentos'),
+          if (widget.isAdmin)
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.storage), label: 'Base de Funcionários'),
+        ],
+        unselectedItemColor: euronWhite,
+        selectedItemColor: euronCyan,
+        onTap: (page) {
+          navigateToPage(page);
+        },
       ),
     );
   }

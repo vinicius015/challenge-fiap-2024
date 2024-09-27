@@ -205,7 +205,7 @@ class _CreateSigningRequestPageState extends State<CreateSigningRequestPage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const BottomNavBar(initialPage: 1)));
+                              builder: (context) => const BottomNavBar(isAdmin: true, initialPage: 1)));
                     }
                   },
                   style: ElevatedButton.styleFrom(

@@ -69,8 +69,24 @@ class _LoginPageState extends State<LoginPage> {
                             ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  Navigator.pushReplacement(context, 
-                                  MaterialPageRoute(builder: (context) => const BottomNavBar(initialPage: 0)));
+                                  if (_emailController.value.text
+                                      .contains("admin")) {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BottomNavBar(
+                                                    initialPage: 0,
+                                                    isAdmin: true)));
+                                  } else {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BottomNavBar(
+                                                    initialPage: 0,
+                                                    isAdmin: false)));
+                                  }
                                 }
                               },
                               style: ElevatedButton.styleFrom(
@@ -97,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Image.asset(
               'assets/eurofarma_logo.png',
-              width: 200, 
+              width: 200,
             ),
           ],
         ),
