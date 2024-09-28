@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const BottomNavBar(initialPage: 0),
+                            const BottomNavBar(isAdmin: true, initialPage: 0),
                       ),
                     );
                   },

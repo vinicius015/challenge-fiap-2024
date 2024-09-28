@@ -173,7 +173,7 @@ class _CreateQuizPageState extends State<CreateQuizPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const BottomNavBar(initialPage: 1)));
+                                  const BottomNavBar(isAdmin: true,initialPage: 1)));
                     }
                   },
                   style: ElevatedButton.styleFrom(
