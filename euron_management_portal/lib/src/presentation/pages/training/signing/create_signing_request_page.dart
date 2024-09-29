@@ -9,7 +9,8 @@ class CreateSigningRequestPage extends StatefulWidget {
   const CreateSigningRequestPage({super.key});
 
   @override
-  State<CreateSigningRequestPage> createState() => _CreateSigningRequestPageState();
+  State<CreateSigningRequestPage> createState() =>
+      _CreateSigningRequestPageState();
 }
 
 class _CreateSigningRequestPageState extends State<CreateSigningRequestPage> {
@@ -18,23 +19,21 @@ class _CreateSigningRequestPageState extends State<CreateSigningRequestPage> {
   String? _selectedTraining;
   String? _selectedEmployee;
   List<String> _selectedEmployees = [];
-  
+
   bool _isIndividual = true; // Controla se o tipo é Individual ou Grupo
 
   // Exemplo de lista de treinamentos
   final List<String> _trainings = [
-    'Treinamento A',
-    'Treinamento B',
-    'Treinamento C',
+    'Manipulação de Substâncias Químicas',
+    'Boas Práticas de Fabricação (BPF)',
+    'Operação de Máquinas',
+    'Testes'
   ];
 
   // Exemplo de lista de funcionários
   final List<String> _employees = [
-    'Funcionário 1',
-    'Funcionário 2',
-    'Funcionário 3',
-    'Funcionário 4',
-    'Funcionário 5',
+    'Gabriel Penna de Lima',
+    'Vinicios Romano',
   ];
 
   void _selectDate(BuildContext context) async {
@@ -60,164 +59,170 @@ class _CreateSigningRequestPageState extends State<CreateSigningRequestPage> {
         child: Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Column(
-            children: [
-              // Dropdown para Treinamento
-              DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  labelText: 'Treinamento',
-                  border: OutlineInputBorder(),
-                ),
-                value: _selectedTraining,
-                items: _trainings.map((String training) {
-                  return DropdownMenuItem<String>(
-                    value: training,
-                    child: Text(training),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedTraining = newValue;
-                  });
-                },
-                validator: (value) {
-                  if (value == null) {
-                    return 'Por favor, selecione um treinamento';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-
-              // DatePicker para Data de Realização
-              TextFormField(
-                readOnly: true,
-                decoration: InputDecoration(
-                  labelText: 'Data de Realização',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.calendar_today),
-                    onPressed: () => _selectDate(context),
-                  ),
-                ),
-                controller: TextEditingController(
-                    text: _selectedDate != null
-                        ? "${_selectedDate!.toLocal()}".split(' ')[0]
-                        : ""),
-                validator: (value) {
-                  if (_selectedDate == null) {
-                    return 'Por favor, selecione uma data';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-
-              // Radio Buttons para Individual ou Grupo
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Radio<bool>(
-                        value: true,
-                        groupValue: _isIndividual,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _isIndividual = value!;
-                          });
-                        },
-                      ),
-                      const Text('Individual'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Radio<bool>(
-                        value: false,
-                        groupValue: _isIndividual,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _isIndividual = value!;
-                          });
-                        },
-                      ),
-                      const Text('Grupo'),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              // Dropdown ou Multi-Select baseado na escolha
-              if (_isIndividual) ...[
-                // Campo Dropdown para Funcionário Individual
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Dropdown para Treinamento
                 DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
-                    labelText: 'Funcionário',
+                    labelText: 'Treinamento',
                     border: OutlineInputBorder(),
                   ),
-                  value: _selectedEmployee,
-                  items: _employees.map((String employee) {
+                  value: _selectedTraining,
+                  items: _trainings.map((String training) {
                     return DropdownMenuItem<String>(
-                      value: employee,
-                      child: Text(employee),
+                      value: training,
+                      child: Text(training),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      _selectedEmployee = newValue;
+                      _selectedTraining = newValue;
                     });
                   },
                   validator: (value) {
                     if (value == null) {
-                      return 'Por favor, selecione um funcionário';
+                      return 'Por favor, selecione um treinamento';
                     }
                     return null;
                   },
                 ),
-              ] else ...[
-                // Campo Multi-Select para Funcionários em Grupo
-                MultiSelectDialogField(
-                  items: _employees.map((employee) => MultiSelectItem(employee, employee)).toList(),
-                  title: const Text("Funcionários"),
-                  searchable: true,
-                  onConfirm: (values) {
-                    setState(() {
-                      _selectedEmployees = values.cast<String>();
-                    });
+                const SizedBox(height: 20),
+            
+                // DatePicker para Data de Realização
+                TextFormField(
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: 'Data de Realização',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.calendar_today),
+                      onPressed: () => _selectDate(context),
+                    ),
+                  ),
+                  controller: TextEditingController(
+                      text: _selectedDate != null
+                          ? "${_selectedDate!.toLocal()}".split(' ')[0]
+                          : ""),
+                  validator: (value) {
+                    if (_selectedDate == null) {
+                      return 'Por favor, selecione uma data';
+                    }
+                    return null;
                   },
+                ),
+                const SizedBox(height: 20),
+            
+                // Radio Buttons para Individual ou Grupo
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Radio<bool>(
+                          value: true,
+                          groupValue: _isIndividual,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isIndividual = value!;
+                            });
+                          },
+                        ),
+                        const Text('Individual'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio<bool>(
+                          value: false,
+                          groupValue: _isIndividual,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isIndividual = value!;
+                            });
+                          },
+                        ),
+                        const Text('Grupo'),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+            
+                // Dropdown ou Multi-Select baseado na escolha
+                if (_isIndividual) ...[
+                  // Campo Dropdown para Funcionário Individual
+                  DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'Funcionário',
+                      border: OutlineInputBorder(),
+                    ),
+                    value: _selectedEmployee,
+                    items: _employees.map((String employee) {
+                      return DropdownMenuItem<String>(
+                        value: employee,
+                        child: Text(employee),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedEmployee = newValue;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Por favor, selecione um funcionário';
+                      }
+                      return null;
+                    },
+                  ),
+                ] else ...[
+                  // Campo Multi-Select para Funcionários em Grupo
+                  MultiSelectDialogField(
+                    items: _employees
+                        .map((employee) => MultiSelectItem(employee, employee))
+                        .toList(),
+                    title: const Text("Funcionários"),
+                    searchable: true,
+                    onConfirm: (values) {
+                      setState(() {
+                        _selectedEmployees = values.cast<String>();
+                      });
+                    },
+                  ),
+                ],
+                const SizedBox(height: 20),
+            
+                // Botão para finalizar
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Solicitação criada com sucesso!')),
+                        );
+            
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BottomNavBar(
+                                    isAdmin: true, initialPage: 1)));
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: euronSoftPurple,
+                      elevation: 0,
+                      foregroundColor: euronWhite,
+                    ),
+                    child: const Text('Finalizar Solicitação',
+                        style: TextStyle(fontSize: 20)),
+                  ),
                 ),
               ],
-              const SizedBox(height: 20),
-
-              // Botão para finalizar
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Solicitação criada com sucesso!')),
-                      );
-
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BottomNavBar(isAdmin: true, initialPage: 1)));
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: euronSoftPurple,
-                    elevation: 0,
-                    foregroundColor: euronWhite,
-                  ),
-                  child: const Text('Finalizar Solicitação',
-                      style: TextStyle(fontSize: 20)),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

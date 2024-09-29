@@ -1,14 +1,29 @@
+import 'dart:convert';
+
 class Department {
-  final String _name;
-  final String _description;
+  int id;
+  String department;
+  String description;
 
   Department({
-    required String name,
-    required String description
-  })
-  : _name = name,
-  _description = description;
+    required this.id,
+    required this.department,
+    required this.description,
+  });
 
-  String get name => _name;
-  String get description => _description;
+  factory Department.fromRawJson(String str) => Department.fromJson(json.decode(str));
+
+  factory Department.fromJson(Map<String, dynamic> json) => Department(
+    id: json["id"]!,
+    department: json["department"]!,
+    description: json["description"]!,
+  );
+
+    String toRawJson() => json.encode(toJson());
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "department": department,
+    "description": description,
+  };
 }

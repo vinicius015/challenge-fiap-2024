@@ -13,14 +13,14 @@ class _SearchSigningsPageState extends State<SearchSigningsPage> {
   bool _selectAll = false; // Controla a seleção de todos os itens
 
   // Lista de treinos para o dropdown, incluindo a opção "Todos"
-  final List<String> _trainings = ['Todos', 'Limpeza de Laboratório', 'Manuseio de Tupla', 'Químicos Gerais'];
+  final List<String> _trainings = ['Todos', 'Manipulação Segura de Substâncias Químicas', 'Boas Práticas de Fabricação (BPF)', 'Operação de Máquinas e Equipamentos'];
   String? _selectedTraining; // Treinamento selecionado no dropdown
 
   // Exemplo de dados de assinatura
   final List<Signing> _signings = [
-    Signing(id: 1, employee: 'Gabriel Penna', training: 'Limpeza de Laboratório', isSigned: true),
-    Signing(id: 2, employee: 'Vinicios Romano', training: 'Manuseio de Tupla', isSigned: false),
-    Signing(id: 3, employee: 'Dayane Santana', training: 'Químicos Gerais', isSigned: true),
+    Signing(id: 1, employee: 'Gabriel Penna', training: 'Manipulação Segura de Substâncias Químicas', isSigned: true),
+    Signing(id: 2, employee: 'Vinicios Romano', training: 'Boas Práticas de Fabricação (BPF)', isSigned: false),
+    Signing(id: 3, employee: 'Vinicios Romano', training: 'Operação de Máquinas e Equipamentos', isSigned: true),
   ];
 
   // Controla a seleção de itens individuais

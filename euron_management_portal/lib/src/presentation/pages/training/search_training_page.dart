@@ -16,73 +16,130 @@ class _SearchTrainingPageState extends State<SearchTrainingPage> {
   final TextEditingController _searchController = TextEditingController();
 
   List<Training> trainingList = [
-    Training(name: 'Treinamento A', code: "11111", sector: 'Produção', quiz: [
-      {
-        'question': 'Qual é o objetivo do treinamento A?',
-        'answers': [
-          {'answer': 'Resposta 1', 'isCorrect': false},
-          {'answer': 'Resposta 2', 'isCorrect': true},
-          {'answer': 'Resposta 3', 'isCorrect': false},
-          {'answer': 'Resposta 4', 'isCorrect': false},
-          {'answer': 'Resposta 5', 'isCorrect': false},
-        ]
-      },
-      {
-        'question': 'Qual é o procedimento correto?',
-        'answers': [
-          {'answer': 'Resposta A', 'isCorrect': true},
-          {'answer': 'Resposta B', 'isCorrect': false},
-          {'answer': 'Resposta C', 'isCorrect': false},
-          {'answer': 'Resposta D', 'isCorrect': false},
-          {'answer': 'Resposta E', 'isCorrect': false},
-        ]
-      }
-    ]),
-    Training(name: 'Treinamento B', code: "11111", sector: 'Qualidade', quiz: [
-      {
-        'question': 'Qual é o objetivo do treinamento B?',
-        'answers': [
-          {'answer': 'Resposta 1', 'isCorrect': false},
-          {'answer': 'Resposta 2', 'isCorrect': true},
-          {'answer': 'Resposta 3', 'isCorrect': false},
-          {'answer': 'Resposta 4', 'isCorrect': false},
-          {'answer': 'Resposta 5', 'isCorrect': false},
-        ]
-      },
-      {
-        'question': 'Qual é o procedimento correto?',
-        'answers': [
-          {'answer': 'Resposta A', 'isCorrect': false},
-          {'answer': 'Resposta B', 'isCorrect': false},
-          {'answer': 'Resposta C', 'isCorrect': false},
-          {'answer': 'Resposta D', 'isCorrect': false},
-          {'answer': 'Resposta E', 'isCorrect': true},
-        ]
-      }
-    ]),
     Training(
-      name: 'Treinamento C',
-      code: "11111",
+        name: 'Testes',
+        code: "00001",
+        sector: 'Produção',
+        quiz: [
+          {
+            'question':
+                'Teste',
+            'answers': [
+              {'answer': 'Teste', 'isCorrect': false},
+              {'answer': 'Teste', 'isCorrect': false},
+              {'answer': 'Teste', 'isCorrect': true},
+              {'answer': 'Teste', 'isCorrect': false},
+              {'answer': 'Teste', 'isCorrect': false},
+            ]
+          }
+        ]),
+    Training(
+        name: 'Manipulação Segura de Substâncias Químicas',
+        code: "00001",
+        sector: 'Produção',
+        quiz: [
+          {
+            'question':
+                'Qual é o equipamento essencial ao manusear produtos químicos?',
+            'answers': [
+              {'answer': 'Capacete', 'isCorrect': false},
+              {'answer': 'Avental', 'isCorrect': false},
+              {'answer': 'EPI', 'isCorrect': true},
+              {'answer': 'Luvas', 'isCorrect': false},
+              {'answer': 'Óculos', 'isCorrect': false},
+            ]
+          },
+          {
+            'question':
+                'Qual é a prática correta ao armazenar produtos perigosos?',
+            'answers': [
+              {'answer': 'Jogar', 'isCorrect': false},
+              {'answer': 'Isolar', 'isCorrect': false},
+              {'answer': 'Misturar', 'isCorrect': false},
+              {'answer': 'Separar', 'isCorrect': false},
+              {'answer': 'Classificar', 'isCorrect': true},
+            ]
+          },
+          {
+            'question': 'O que fazer em caso de vazamento químico?',
+            'answers': [
+              {'answer': 'Ignorar', 'isCorrect': false},
+              {'answer': 'Limpar', 'isCorrect': false},
+              {'answer': 'Reportar', 'isCorrect': true},
+              {'answer': 'Sair', 'isCorrect': false},
+              {'answer': 'Recolher', 'isCorrect': false},
+            ]
+          },
+        ]),
+    Training(
+        name: 'Boas Práticas de Fabricação (BPF)',
+        code: "00002",
+        sector: 'Qualidade',
+        quiz: [
+          {
+            'question': 'O que garante a qualidade dos produtos farmacêuticos?',
+            'answers': [
+              {'answer': 'BPF', 'isCorrect': true},
+              {'answer': 'CNPJ', 'isCorrect': false},
+              {'answer': 'CRM', 'isCorrect': false},
+              {'answer': 'ISO', 'isCorrect': false},
+              {'answer': 'OHSAS', 'isCorrect': false},
+            ]
+          },
+          {
+            'question': 'Qual órgão regula as BPF no Brasil?',
+            'answers': [
+              {'answer': 'FDA', 'isCorrect': false},
+              {'answer': 'ANVISA', 'isCorrect': true},
+              {'answer': 'EMA', 'isCorrect': false},
+              {'answer': 'WHO', 'isCorrect': false},
+              {'answer': 'USP', 'isCorrect': false},
+            ]
+          },
+          {
+            'question': 'O que deve ser sempre registrado durante a produção?',
+            'answers': [
+              {'answer': 'Estoque', 'isCorrect': false},
+              {'answer': 'Processo', 'isCorrect': false},
+              {'answer': 'Horas', 'isCorrect': false},
+              {'answer': 'Desperdício', 'isCorrect': false},
+              {'answer': 'Documentação', 'isCorrect': true},
+            ]
+          }
+        ]),
+    Training(
+      name: 'Operação de Máquinas e Equipamentos',
+      code: "00003",
       sector: 'Manutenção',
       quiz: [
         {
-          'question': 'Qual é o objetivo do treinamento C?',
+          'question': 'Qual é o tipo de manutenção que evita falhas?',
           'answers': [
-            {'answer': 'Resposta 1', 'isCorrect': false},
-            {'answer': 'Resposta 2', 'isCorrect': false},
-            {'answer': 'Resposta 3', 'isCorrect': false},
-            {'answer': 'Resposta 4', 'isCorrect': true},
-            {'answer': 'Resposta 5', 'isCorrect': false},
+            {'answer': 'Emergencial', 'isCorrect': false},
+            {'answer': 'Preditiva', 'isCorrect': false},
+            {'answer': 'Corretiva', 'isCorrect': false},
+            {'answer': 'Preventiva', 'isCorrect': true},
+            {'answer': 'Passiva', 'isCorrect': false},
           ]
         },
         {
-          'question': 'Qual é o procedimento correto?',
+          'question': 'O que deve ser verificado antes de iniciar uma máquina?',
           'answers': [
-            {'answer': 'Resposta A', 'isCorrect': false},
-            {'answer': 'Resposta B', 'isCorrect': false},
-            {'answer': 'Resposta C', 'isCorrect': false},
-            {'answer': 'Resposta D', 'isCorrect': true},
-            {'answer': 'Resposta E', 'isCorrect': false},
+            {'answer': 'Motor', 'isCorrect': false},
+            {'answer': 'Lubrificação', 'isCorrect': true},
+            {'answer': 'Energia', 'isCorrect': false},
+            {'answer': 'Ruído', 'isCorrect': false},
+            {'answer': 'Sensor', 'isCorrect': false},
+          ]
+        },
+        {
+          'question': 'Quem pode operar uma máquina de produção?',
+          'answers': [
+            {'answer': 'Visitante', 'isCorrect': false},
+            {'answer': 'Gerente', 'isCorrect': false},
+            {'answer': 'Operador', 'isCorrect': true},
+            {'answer': 'Técnico', 'isCorrect': false},
+            {'answer': 'Qualquer um', 'isCorrect': false},
           ]
         }
       ],
