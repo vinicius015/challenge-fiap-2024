@@ -1,19 +1,30 @@
+import 'dart:convert';
+
 import 'package:euron_management_portal/src/data/models/department.dart';
 
 class Position {
-  final String _name;
-  final String _description;
-  final Department _department;
+  int id;
+  String position;
+  Department department;
 
-  Position(
-      {required String name,
-      required String description,
-      required Department department})
-      : _name = name,
-        _description = description,
-        _department = department;
+  Position({
+    required this.id,
+    required this.position,
+    required this.department,
+  });
 
-  String get name => _name;
-  String get description => _description;
-  Department get department => _department;
+  factory Position.fromRawJson(String str) => Position.fromJson(json.decode(str));
+
+  factory Position.fromJson(Map<String, dynamic> json) => Position(
+        id: json["id"] ?? 0,
+        position: json["position"] ?? '',
+        department: Department.fromJson(json["departament"]),
+      );
+
+  String toRawJson() => json.encode(toJson());
+
+   Map<String, dynamic> toJson() => {
+        "id": id,
+        "department": department.toJson(),
+      };
 }

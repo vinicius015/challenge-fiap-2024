@@ -2,8 +2,8 @@ import 'package:euron_management_portal/src/config/globals.dart';
 import 'package:euron_management_portal/src/presentation/components/bottom_nav_bar.dart';
 import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
 import 'package:euron_management_portal/src/presentation/components/decorated_text_form_field.dart';
-import 'package:euron_management_portal/src/utils/validations/email_validator.dart';
-import 'package:euron_management_portal/src/utils/validations/password_validator.dart';
+import 'package:euron_management_portal/src/presentation/pages/auth/auth_confirmation.dart';
+import 'package:euron_management_portal/src/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,8 +15,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _reController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  UserService userService = UserService();
 
   @override
   void initState() {
@@ -41,23 +42,12 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       DecoratedTextFormField(
                         keyboardType: TextInputType.text,
-                        label: 'Email',
-                        controller: _emailController,
+                        label: 'Registro de Funcionário (RE)',
+                        controller: _reController,
                         validator: (value) {
-                          String? result = EmailValidator.validate(value!);
-                          return result!.isEmpty ? null : result;
+                          // String? result = EmailValidator.validate(value!);
+                          // return result!.isEmpty ? null : result;
                         },
-                      ),
-                      const SizedBox(height: 25),
-                      DecoratedTextFormField(
-                        keyboardType: TextInputType.text,
-                        label: 'Senha',
-                        controller: _passwordController,
-                        validator: (value) {
-                          String? result = PasswordValidator.validate(value!);
-                          return result!.isEmpty ? null : result;
-                        },
-                        isObscure: true,
                       ),
                       const SizedBox(height: 25),
                       SizedBox(
@@ -67,26 +57,13 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  if (_emailController.value.text
-                                      .contains("admin")) {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BottomNavBar(
-                                                    initialPage: 0,
-                                                    isAdmin: true)));
-                                  } else {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BottomNavBar(
-                                                    initialPage: 0,
-                                                    isAdmin: false)));
-                                  }
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AuthConfirmationPage()));
                                 }
                               },
                               style: ElevatedButton.styleFrom(

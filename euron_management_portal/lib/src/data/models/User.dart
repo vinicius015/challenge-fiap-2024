@@ -1,34 +1,63 @@
+import 'dart:convert';
+
 import 'package:euron_management_portal/src/data/models/position.dart';
 
 class User {
-  final String _id;
-  final String _password;
-  final bool _isActive;
-  final Position _position;
-  final DateTime? _lastAccess;
+  int id;
+  String re;
+  String username;
+  String name;
+  String email;
+  String cpf;
+  int number;
+  Position position;
 
-  User(
-      {required String id,
-      required String password,
-      required bool isActive,
-      required Position position,
-      DateTime? lastAccess
-      })
-      : _id = id,
-        _password = password,
-        _isActive = isActive,
-        _position = position,
-        _lastAccess = lastAccess;
+  User({
+    required this.id,
+    required this.re,
+    required this.username,
+    required this.name,
+    required this.email,
+    required this.cpf,
+    required this.number,
+    required this.position,
+  });
 
-  String get id => _id;
+  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
-  String get password => _password;
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"]!,
+        re: json["re"]!,
+        username: json["username"]!,
+        name: json["name"]!,
+        email: json["email"]!,
+        cpf: json["cpf"]!,
+        number: json["number"]!,
+        position: Position.fromJson(json["position"]),
+      );
 
-  bool get isActive => _isActive;
+  String toRawJson() => json.encode(toJson());
 
-  Position get position => _position;
+  String toRawJsonWithoutId() => json.encode(toJsonWithoutId());
 
-  DateTime? get lastAccess => _lastAccess;
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "re": re,
+        "username": username,
+        "name": name,
+        "email": email,
+        "cpf": cpf,
+        "number": number,
+        "position": position.id,
+      };
+
+        Map<String, dynamic> toJsonWithoutId() => {
+        "re": re,
+        "username": username,
+        "name": name,
+        "email": email,
+        "cpf": cpf,
+        "number": number,
+        "position": position.id,
+      };
 }
-
-
