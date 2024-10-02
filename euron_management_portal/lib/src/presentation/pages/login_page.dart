@@ -1,5 +1,4 @@
 import 'package:euron_management_portal/src/config/globals.dart';
-import 'package:euron_management_portal/src/presentation/components/bottom_nav_bar.dart';
 import 'package:euron_management_portal/src/presentation/components/custom_appbar.dart';
 import 'package:euron_management_portal/src/presentation/components/decorated_text_form_field.dart';
 import 'package:euron_management_portal/src/presentation/pages/auth/auth_confirmation.dart';
@@ -45,8 +44,11 @@ class _LoginPageState extends State<LoginPage> {
                         label: 'Registro de Funcionário (RE)',
                         controller: _reController,
                         validator: (value) {
-                          // String? result = EmailValidator.validate(value!);
-                          // return result!.isEmpty ? null : result;
+                          if (_reController.text.endsWith('5') || _reController.text.endsWith('7')) {
+                            return null;
+                          } else {
+                            return 'Insira um RE válido';
+                          }
                         },
                       ),
                       const SizedBox(height: 25),
@@ -59,11 +61,12 @@ class _LoginPageState extends State<LoginPage> {
                             ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
+                                  bool isAdmin = _reController.text.endsWith('5') ? true : false;
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const AuthConfirmationPage()));
+                                              AuthConfirmationPage(isAdmin: isAdmin)));
                                 }
                               },
                               style: ElevatedButton.styleFrom(

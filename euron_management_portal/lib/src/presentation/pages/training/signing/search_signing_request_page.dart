@@ -6,7 +6,8 @@ class SearchSigningRequestsPage extends StatefulWidget {
   const SearchSigningRequestsPage({super.key});
 
   @override
-  State<SearchSigningRequestsPage> createState() => _SearchSigningRequestsPageState();
+  State<SearchSigningRequestsPage> createState() =>
+      _SearchSigningRequestsPageState();
 }
 
 class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
@@ -14,13 +15,18 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
   bool _selectAll = false; // Controla a seleção de todos os itens
 
   // Lista de treinos para o dropdown, incluindo a opção "Todos"
-  final List<String> _trainings = ['Todos', 'Boas Práticas de Fabricação (BPF)'];
+  final List<String> _trainings = [
+    'Todos',
+    'Boas Práticas de Fabricação (BPF)'
+  ];
   String? _selectedTraining; // Treinamento selecionado no dropdown
 
   // Exemplo de dados de solicitação de assinatura
   final List<SigningRequest> _signingRequests = [
-    SigningRequest(id: 2, training: 'Boas Práticas de Fabricação (BPF)', isSigned: false),
-    SigningRequest(id: 3, training: 'Operação de Máquinas e Equipamentos', isSigned: true),
+    SigningRequest(
+        id: 2, training: 'Boas Práticas de Fabricação (BPF)', isSigned: false),
+    SigningRequest(
+        id: 3, training: 'Operação de Máquinas e Equipamentos', isSigned: true),
   ];
 
   // Controla a seleção de itens individuais
@@ -30,7 +36,8 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
   @override
   void initState() {
     super.initState();
-    _selectedItems = List<bool>.generate(_signingRequests.length, (index) => false);
+    _selectedItems =
+        List<bool>.generate(_signingRequests.length, (index) => false);
   }
 
   // Método para filtrar os itens
@@ -39,7 +46,9 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
 
     // Filtra pelo treinamento selecionado
     if (_selectedTraining != null && _selectedTraining != 'Todos') {
-      filteredList = filteredList.where((request) => request.training == _selectedTraining).toList();
+      filteredList = filteredList
+          .where((request) => request.training == _selectedTraining)
+          .toList();
     }
 
     return filteredList;
@@ -48,7 +57,9 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
   // Método para simular o download do documento assinado
   void _download(SigningRequest request) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Baixando documento para a solicitação do treinamento ${request.training}...')),
+      SnackBar(
+          content: Text(
+              'Baixando documento para a solicitação do treinamento ${request.training}...')),
     );
   }
 
@@ -67,7 +78,9 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Baixando documentos: ${selectedRequests.map((r) => r.training).join(', ')}')),
+        SnackBar(
+            content: Text(
+                'Baixando documentos: ${selectedRequests.map((r) => r.training).join(', ')}')),
       );
       // Aqui você pode implementar a lógica para baixar os documentos das solicitações
     }
@@ -135,11 +148,12 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
                   return Card(
                     child: ListTile(
                       onTap: () {
-                        Navigator.push(
+                        if (!request.isSigned) {
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const QuizPage()));
+                                  builder: (context) => const QuizPage()));
+                        }
                       },
                       leading: Checkbox(
                         value: _selectedItems[index],
@@ -147,14 +161,17 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
                           setState(() {
                             _selectedItems[index] = value!;
                             // Atualiza o estado do checkbox "Selecionar Todos" se necessário
-                            _selectAll = _selectedItems.every((selected) => selected);
+                            _selectAll =
+                                _selectedItems.every((selected) => selected);
                           });
                         },
                       ),
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Treinamento: ${request.training}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          Text('Treinamento: ${request.training}',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                           Text('ID de Assinatura: ${request.id}'),
                         ],
                       ),
@@ -167,20 +184,25 @@ class _SearchSigningRequestsPageState extends State<SearchSigningRequestsPage> {
                             children: [
                               Icon(
                                 Icons.check_circle,
-                                color: request.isSigned ? Colors.green : Colors.red,
+                                color: request.isSigned
+                                    ? Colors.green
+                                    : Colors.red,
                               ),
                               const SizedBox(height: 4),
-                              Text(request.isSigned ? 'Assinado' : 'Pendente', 
-                                    style: TextStyle(
-                                      color: request.isSigned ? Colors.green : Colors.red,
-                                      fontSize: 12,
-                                    ),
+                              Text(
+                                request.isSigned ? 'Assinado' : 'Pendente',
+                                style: TextStyle(
+                                  color: request.isSigned
+                                      ? Colors.green
+                                      : Colors.red,
+                                  fontSize: 12,
+                                ),
                               ),
                             ],
                           ),
                           const SizedBox(width: 10),
                           // Botão de download
-                          if (request.isSigned) 
+                          if (request.isSigned)
                             IconButton(
                               icon: const Icon(Icons.download),
                               onPressed: () => _download(request),

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:euron_management_portal/src/config/globals.dart';
 
 class AuthConfirmationPage extends StatefulWidget {
-  const AuthConfirmationPage({super.key});
+  final bool isAdmin;
+
+  const AuthConfirmationPage({super.key, required this.isAdmin});
 
   @override
   State<AuthConfirmationPage> createState() => _AuthConfirmationPageState();
@@ -96,12 +98,16 @@ class _AuthConfirmationPageState extends State<AuthConfirmationPage> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BottomNavBar(
-                              initialPage: 0, isAdmin: false)));
+                          builder: (context) => BottomNavBar(
+                              initialPage: 0, isAdmin: widget.isAdmin)));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: euronSoftPurple,
                   padding: const EdgeInsets.symmetric(vertical: 16),
+                  foregroundColor: euronWhite,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
                 child: const Text(
                   'Enviar',
